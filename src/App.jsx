@@ -1,9 +1,22 @@
-function App() {
+import { Routes, Route, Navigate } from "react-router-dom";
+
+import Landing from "./pages/Landing";
+import Setup from "./pages/Setup";
+import Quiz from "./pages/Quiz";
+import Results from "./pages/Results";
+
+
+export default function App() {
   return (
-    <div>
-      <h1>Test Your Knowledge</h1>
-      <p>A fun way to measure what you</p>
-    </div>
+    <Routes>
+      <Route path="/" element={<Landing />} />
+      <Route path="/setup" element={<Setup />} />
+      <Route path="/quiz" element={<Quiz />} />
+      <Route path="/results" element={<Results />} />
+      <Route path="/history" element={<History />} />
+
+      {/* If user types wrong URL */}
+      <Route path="*" element={<Navigate to="/" />} />
+    </Routes>
   );
 }
-export default App
