@@ -13,9 +13,8 @@ export default function App() {
       <Route path="/setup" element={<Setup />} />
       <Route path="/quiz" element={<Quiz />} />
       <Route path="/results" element={<Results />} />
-      <Route path="/history" element={<History />} />
-
-      {/* If user types wrong URL */}
+     
+     
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>
   );

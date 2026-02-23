@@ -1,18 +1,18 @@
-export default function Setup() {
-  return (
-    <main className="min-h-screen bg-white flex items-center justify-center px-6">
-      <div className="w-full max-w-xl">
-        <h2 className="text-2xl font-bold text-black">Quiz Setup</h2>
-        <p className="mt-2 text-black/70">
-          Choose a topic, difficulty and number of questions.
-        </p>
+import { useNavigate } from "react-router-dom";
 
-        <div className="mt-6 p-5 border rounded-lg">
-          <p className="text-sm text-black/60">
-            Setup form is coming next...
-          </p>
-        </div>
-      </div>
-    </main>
+export default function Setup() {
+  const navigate = useNavigate();
+
+  return (
+    <div>
+      <h1>Quiz Setup</h1>
+
+      <button
+        onClick={() => navigate("/quiz")}
+        className="bg-purple-600 text-white px-6 py-3 rounded-xl"
+      >
+        Start Quiz
+      </button>
+    </div>
   );
 }
