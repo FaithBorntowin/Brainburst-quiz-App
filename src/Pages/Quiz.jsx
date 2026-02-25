@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import QuestionCard from "../components/QuestionCard";
 
 const DUMMY_QUESTIONS = [
@@ -7,15 +8,19 @@ const DUMMY_QUESTIONS = [
     question:
       "Which HTTP method is most appropriate for updating an existing resource in a RESTful API?",
     options: ["GET", "POST", "PUT", "DELETE"],
+    correct: "PUT",
   },
   {
     id: 2,
     question: "Which library is commonly used for routing in React?",
     options: ["React Router", "Axios", "Redux", "Formik"],
+    correct: "React Router",
   },
 ];
 
 export default function Quiz() {
+  const navigate = useNavigate();
+
   const total = DUMMY_QUESTIONS.length;
 
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -36,10 +41,17 @@ export default function Quiz() {
     if (!selectedOption) return;
 
     const isLast = currentIndex === total - 1;
+
     if (isLast) {
-      alert("Finish clicked — Results page is next.");
+      navigate("/results", {
+        state: {
+          questions: DUMMY_QUESTIONS,
+          answers,
+        },
+      });
       return;
     }
+
     setCurrentIndex((prev) => Math.min(total - 1, prev + 1));
   };
 
@@ -58,6 +70,5 @@ export default function Quiz() {
         isLast={currentIndex === total - 1}
       />
     </div>
-    
   );
 }
