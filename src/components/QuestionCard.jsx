@@ -34,7 +34,7 @@ export default function QuestionCard({
                 "w-full flex items-center gap-3 rounded-xl border px-4 py-3 text-left transition",
                 isSelected
                   ? "border-purple-600 ring-2 ring-purple-100"
-                  : "border-gray-200 hover:border-purple-300",
+                  : "border-gray-200 hover:border-purple-100 hover:border-purple-400  hover:shadow-sm",
               ].join(" ")}
             >
               <span
