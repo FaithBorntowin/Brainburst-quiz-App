@@ -31,20 +31,23 @@ export default function QuestionCard({
               type="button"
               onClick={() => onSelect(opt)}
               className={[
-                "w-full flex items-center gap-3 rounded-xl border px-4 py-3 text-left transition",
-                isSelected
+                 "group w-full flex items-center gap-3 rounded-xl px-4 py-3 text-left",
+    "transition-all duration-200 cursor-pointer border",
+    selectedOption === opt
                   ? "border-purple-600 ring-2 ring-purple-100"
                   : "border-gray-200 hover:border-purple-100 hover:border-purple-400  hover:shadow-sm",
               ].join(" ")}
             >
               <span
                 className={[
-                  "flex h-8 w-8 items-center justify-center rounded-lg text-xs font-bold",
-                  isSelected ? "bg-purple-600 text-white" : "bg-gray-100 text-gray-700",
-                ].join(" ")}
-              >
-                {letter}
-              </span>
+                 "flex h-8 w-8 items-center justify-center rounded-lg text-xs font-bold transition",
+    selectedOption === opt
+      ? "bg-white text-purple-700"
+      : "bg-gray-200 text-gray-700 group-hover:bg-purple-500 group-hover:text-white"
+  ].join(" ")}
+>
+  {String.fromCharCode(65 + i)}
+</span>
 
               <span className="text-sm sm:text-base text-gray-800">{opt}</span>
             </button>
