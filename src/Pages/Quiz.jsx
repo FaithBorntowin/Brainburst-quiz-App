@@ -22,6 +22,7 @@ export default function Quiz() {
         setError("");
 
         const qs = await fetchRandomQuestions({ signal: controller.signal });
+
         setQuestions(qs);
         setCurrentIndex(0);
         setAnswers({});
@@ -38,6 +39,9 @@ export default function Quiz() {
     return () => controller.abort();
   }, []);
 
+  // ===============================
+  // Loading State
+  // ===============================
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
@@ -46,6 +50,9 @@ export default function Quiz() {
     );
   }
 
+  // ===============================
+  // Error State
+  // ===============================
   if (error) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
@@ -72,20 +79,49 @@ export default function Quiz() {
     );
   }
 
+  // ===============================
+  // No Questions Safety Guard
+  // ===============================
+  if (!questions.length) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <p className="text-gray-700 font-semibold">
+          No questions available. Please try again.
+        </p>
+      </div>
+    );
+  }
+
   const total = questions.length;
-  const currentQuestion = questions[currentIndex];
-  const selectedOption = answers[currentQuestion.id] || "";
+
+  // Extra safety: ensure index is valid
+  const safeIndex =
+    currentIndex >= 0 && currentIndex < total ? currentIndex : 0;
+
+  const currentQuestion = questions[safeIndex];
+
+  const selectedOption =
+    currentQuestion && answers[currentQuestion.id]
+      ? answers[currentQuestion.id]
+      : "";
 
   const handleSelect = (opt) => {
-    setAnswers((prev) => ({ ...prev, [currentQuestion.id]: opt }));
+    if (!currentQuestion) return;
+
+    setAnswers((prev) => ({
+      ...prev,
+      [currentQuestion.id]: opt,
+    }));
   };
 
-  const handlePrev = () => setCurrentIndex((i) => Math.max(0, i - 1));
+  const handlePrev = () =>
+    setCurrentIndex((i) => Math.max(0, i - 1));
 
   const handleNext = () => {
-    if (!selectedOption) return;
+    if (!currentQuestion || !selectedOption) return;
 
-    const isLast = currentIndex === total - 1;
+    const isLast = safeIndex === total - 1;
+
     if (isLast) {
       navigate("/results", { state: { questions, answers } });
       return;
@@ -97,7 +133,7 @@ export default function Quiz() {
   return (
     <div className="min-h-screen bg-gray-50 px-4 py-10">
       <QuestionCard
-        index={currentIndex}
+        index={safeIndex}
         total={total}
         question={currentQuestion.question}
         options={currentQuestion.options}
@@ -105,8 +141,8 @@ export default function Quiz() {
         onSelect={handleSelect}
         onPrev={handlePrev}
         onNext={handleNext}
-        isFirst={currentIndex === 0}
-        isLast={currentIndex === total - 1}
+        isFirst={safeIndex === 0}
+        isLast={safeIndex === total - 1}
       />
     </div>
   );
