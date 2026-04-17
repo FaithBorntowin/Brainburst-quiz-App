@@ -1,7 +1,7 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 
-import Landing from "./pages/Landing";
-import Setup from "./pages/Setup";
+import Landing from "./pages/landing";
+import Setup from "./pages/setup";
 import Quiz from "./pages/Quiz";
 import Results from "./pages/Results";
 
