@@ -9,8 +9,8 @@ An interactive quiz application built with **React (Vite)** and **Tailwind CSS**
 
 ## 📸 Screenshots
 
-### Landing Page
+### Landing Page First page
 ![Landing Page](./screenshots/Landingpage.png.jpg)
 
 ### Results Page
-![Results Page](./screenshots/resultpage.png.jpg)
+![Results Page](./screenshots/resultpage.png.jpg) 
