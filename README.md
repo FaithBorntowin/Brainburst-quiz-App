@@ -7,15 +7,10 @@ An interactive quiz application built with **React (Vite)** and **Tailwind CSS**
 ![API](https://img.shields.io/badge/API-OpenTDB-orange)
 ![Status](https://img.shields.io/badge/Project-Capstone-success)
 
-
-
-
 ## 📸 Screenshots
 
 ### Landing Page
 ![Landing Page](./screenshots/Landingpage.png.jpg)
-
-
 
 ### Results Page
 ![Results Page](./screenshots/resultpage.png.jpg)
